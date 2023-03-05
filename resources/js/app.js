@@ -14,11 +14,15 @@ deleteButtons.forEach((button) => {
 
         event.preventDefault();
 
+        const message = button.getAttribute('message');
         const modal = document.getElementById('delete-modal-project');
 
         const bootstrapModal = new bootstrap.Modal(modal);
 
         bootstrapModal.show();
+
+        const modalContent = modal.querySelector('#modal-item-content');
+        modalContent.textContent = message;
 
         const deleteButton = modal.querySelector('#confirm-delete');
 

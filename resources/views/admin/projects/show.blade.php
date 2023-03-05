@@ -12,6 +12,9 @@
       </div>
       <div class="col-12">
         <p><strong>Slug: </strong> {{$project->slug}}</p>
+        @if($project->type)
+          <p><strong>Tipo: </strong> {{ $project->type->name }}</p>
+        @endif
         <label class="d-block"><strong>Descrizione: </strong></label>
         <p>{{$project->description}}</p>
       </div>

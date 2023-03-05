@@ -18,6 +18,24 @@
                 <div class="text-danger">{{$message}}</div>
               @enderror
             </div>
+            <div class="form-group">
+              <div class="control-label">
+                Tipo
+              </div>
+              <select class="form-control" name="type_id" id="type_id">
+                  <option value="">Seleziona tipo progetto</option>
+                  @foreach($types as $type)
+                    <option value="{{ $type->id }}" 
+                      {{$type->id == old('type_id', $project->type_id) ? 'selected' : ''}}
+                    >
+                        {{ $type->name }}
+                    </option>
+                  @endforeach
+              </select>
+              @error('type')
+                <div class="text-danger">{{$message}}</div>
+              @enderror
+            </div>
             <div class="form-group my-3">
               <div class="control-label">
                 Descrizione

@@ -17,7 +17,8 @@ class TypeController extends Controller
      */
     public function index()
     {
-        //
+        $types = Type::all(); 
+        return view('admin.types.index', compact('types'));
     }
 
     /**
@@ -27,7 +28,7 @@ class TypeController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.types.create');
     }
 
     /**
@@ -38,7 +39,13 @@ class TypeController extends Controller
      */
     public function store(StoreTypeRequest $request)
     {
-        //
+        $data = $request->validated();
+
+        $data['slug'] = Type::generateSlug($request->name);
+
+        $newType = Type::create($data);
+
+        return redirect()->route('admin.types.index')->with('message', 'Creazione nuovo tipo eseguita');
     }
 
     /**
@@ -49,7 +56,7 @@ class TypeController extends Controller
      */
     public function show(Type $type)
     {
-        //
+        return view('admin.types.show', compact('type'));
     }
 
     /**
@@ -60,7 +67,7 @@ class TypeController extends Controller
      */
     public function edit(Type $type)
     {
-        //
+        return view('admin.types.edit', compact('type'));
     }
 
     /**
@@ -72,7 +79,13 @@ class TypeController extends Controller
      */
     public function update(UpdateTypeRequest $request, Type $type)
     {
-        //
+        $data = $request->validated();
+
+        $data['slug'] = Type::generateSlug($request->name);
+
+        $type->update($data);
+
+        return redirect()->route('admin.types.index')->with('message', 'Modifica al tipo eseguita');
     }
 
     /**
@@ -83,6 +96,8 @@ class TypeController extends Controller
      */
     public function destroy(Type $type)
     {
-        //
+        $type->delete();
+
+        return redirect()->route('admin.types.index')->with('message','Il tipo è stato eliminato correttamente');
     }
 }

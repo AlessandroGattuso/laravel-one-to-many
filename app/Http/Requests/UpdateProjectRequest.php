@@ -26,7 +26,8 @@ class UpdateProjectRequest extends FormRequest
     {
         return [
             'title' => ['required', Rule::unique('projects')->ignore($this->project) ,'max:200'],
-            'description' => ['nullable', 'max:300']
+            'description' => ['nullable', 'max:300'],
+            'type_id' => ['nullable', 'exists:types,id']
         ]; 
     }
 
@@ -41,7 +42,8 @@ class UpdateProjectRequest extends FormRequest
             'title.required' => 'Il titolo è obbligatorio',
             'title.unique' => 'Questo titolo è già stato assegnato ad un progetto',
             'title.max' => 'Il titolo non deve essere più lungo di :max caratteri',
-            'description.max' => 'La descrizione non può contenere più di :max caratteri'
+            'description.max' => 'La descrizione non può contenere più di :max caratteri',
+            'type_id' => 'Tipo non valido'
         ];
     }
 }
