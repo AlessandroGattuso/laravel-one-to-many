@@ -27,7 +27,7 @@ class ProjectSeeder extends Seeder
 
             $newProject->title = $faker->sentence(3);
             $newProject->description = $faker->text(100);
-            if($type_size)
+            if($types_size)
                 $newProject->type_id = $faker->numberBetween(1, $types_size);
             $newProject->slug = Str::slug($newProject->title, '-');
         
